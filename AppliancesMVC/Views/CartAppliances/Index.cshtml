@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Appliances.Models.CartAppliance>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Cart</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Appliance.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Appliance.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Appliance.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Appliance.Price)
+            </th>
+            <th>
+                Total :
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <img src='@item.Appliance.Image' alt="Avatar" style="width:100%">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Appliance.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Appliance.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Appliance.Price) Mdl
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice) Mdl
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.Id">Remove</a>
+            </td>
+        </tr>
+}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td><h4>Total:</h4></td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td><h4>@Model.Sum(item => item.TotalPrice).ToString("0.00") Mdl</h4></td>
+            <td>
+                <a asp-action="" asp-route-id="" class="text-decoration-none text-success"><h4>Buy now</h4></a>
+            </td>
+        </tr>
+
+    </tfoot>
+</table>

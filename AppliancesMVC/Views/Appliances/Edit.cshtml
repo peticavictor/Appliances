@@ -1,0 +1,169 @@
+﻿@model Appliances.Models.Appliance
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="~/css/croppie.css" />
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js" integrity="sha512-Gs+PsXsGkmr+15rqObPJbenQ2wB3qYvTHuJO6YJzPe/dTLvhy0fmae2BcnaozxDo5iaF8emzmCZWbQ1XXiX2Ig==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<h1>Edit</h1>
+
+<h4>Appliance</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <input asp-for="Type" class="form-control" />
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <input asp-for="Brand" class="form-control" />
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Model" class="control-label"></label>
+                <input asp-for="Model" class="form-control" />
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Code" class="control-label"></label>
+                <input asp-for="Code" class="form-control" />
+                <span asp-validation-for="Code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProducedOn" class="control-label"></label>
+                <input asp-for="ProducedOn" class="form-control" />
+                <span asp-validation-for="ProducedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="Image" class="control-label"></label>
+            <input asp-for="Image" id="upload" type="text" class="form-control" />
+            <img src="@Model.Image" />
+            <span asp-validation-for="Image" class="text-danger"></span>
+
+            <div id="result">
+
+            </div>
+            <div id="upload-preview" style="height:fit-content" class="mt30 mb35"></div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+
+            @*<div class="form-group">
+            <label asp-for="Image" class="control-label"></label>
+            <input asp-for="Image" class="form-control" />
+            <input id="upload" type="file" class="form-control" accept="image/*" />
+            <span asp-validation-for="Image" class="text-danger"></span>
+
+            <button type="button" onclick="uploadImg()">Incarca imagine</button>
+
+            <div id="upload-preview" style="height:fit-content" class="mt30 mb35"></div>
+        </div>*@
+
+            @*<input type="file" id="inputFile" accept="image/png, image/jpeg">
+
+            <div id="croppieMount">image will be here!</div>
+
+            <div id="actions" style="display:none;">
+                <button id="cropBtn" type="button" class="btn-dark">Crop</button>
+            </div>
+
+            <input asp-for="Image" id="upload" type="text" class="form-control" /> 
+            <img src="@Model.Image" id="image" style="display:none"/>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>*@
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@*<script src="~/js/croppie.js"></script>
+<script>
+    let croppie = null;
+    let croppieMount = document.getElementById('croppieMount');
+    let inputFile = document.getElementById('inputFile')
+    let cropBtn = document.getElementById('cropBtn')
+    let image = document.getElementById('image')
+    const upload = document.getElementById('upload')
+
+    function cleanUpCroppie() {
+        croppieMount.innerHTML = '';
+        croppieMount.classList.remove('croppie-container');
+
+        croppie = null;
+    }
+    let reader = new FileReader();
+
+    let data = ""
+
+    inputFile.addEventListener('change', () => {
+        cleanUpCroppie();
+
+        // Our input file
+        let file = inputFile.files[0];
+
+        
+        reader.onloadend = function (event) {
+            // Get the data ulr of the file
+            data = event.target.result;
+
+            croppie = new Croppie(croppieMount, {
+                url: data,
+                viewport: {
+                    width: 200,
+                    height: 200
+                },
+                boundary: {
+                    width: 300,
+                    height: 300
+                },
+                showZoomer: false,
+                enableResize:true
+            });
+
+            // Binds the image to croppie
+            
+            // Unhide the `actions` div element
+            actions.style.display = '';
+        }
+
+        reader.readAsDataURL(file);
+    })
+    cropBtn.addEventListener("click", () => {
+        croppie.result('blob').then(function (blob) {
+            // do something with cropped blob
+            console.log(data)
+            image.src = data;
+        });
+
+        image.style.display = '';
+        croppieMount.style='display:none;'
+        actions.style = 'display:none;'
+        upload.nodeValue = data;
+    })
+    
+</script>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
