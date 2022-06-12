@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Appliances.Models;
+using AppliancesMVC.Models;
 using AppliancesMVC.Data;
 
-namespace AppliancesMVC.Controllers
+namespace Appliances.Controllers
 {
     public class AppliancesController : Controller
     {

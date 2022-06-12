@@ -5,14 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Appliances.Models
+namespace AppliancesMVC.Models
 {
     public class Cart
     {
         [Key]
         public int Id { get; set; }
         public DateTime CreatedOn { get; set; }
-        public bool IsPayed { get; set; }
+        public int IsPayed { get; set; }
 
         [ForeignKey("User")]
         public int UserId{ get; set; }

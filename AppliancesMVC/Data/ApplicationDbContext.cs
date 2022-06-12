@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Appliances.Models;
+using AppliancesMVC.Models;
 
 namespace AppliancesMVC.Data
 {
@@ -13,9 +13,14 @@ namespace AppliancesMVC.Data
             : base(options)
         {
         }
-        public DbSet<Appliances.Models.Appliance> Appliance { get; set; }
-        public DbSet<Appliances.Models.Cart> Cart { get; set; }
-        public DbSet<Appliances.Models.User> User { get; set; }
-        public DbSet<Appliances.Models.CartAppliance> CartAppliance { get; set; }
+        public DbSet<AppliancesMVC.Models.Appliance> Appliance { get; set; }
+        public DbSet<AppliancesMVC.Models.Cart> Cart { get; set; }
+        public DbSet<AppliancesMVC.Models.User> User { get; set; }
+        public DbSet<AppliancesMVC.Models.CartAppliance> CartAppliance { get; set; }
+
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+          => optionsBuilder.UseNpgsql("Host=tyke.db.elephantsql.com;Port=5432;Database=btfayonf;Username=btfayonf;Password=YGRztec9Vh2uqHATDho4F7gia4FHXKVL;");
     }
 }

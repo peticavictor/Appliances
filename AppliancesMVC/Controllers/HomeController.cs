@@ -1,5 +1,4 @@
-﻿using Appliances.Models;
-using AppliancesMVC.Data;
+﻿using AppliancesMVC.Data;
 using AppliancesMVC.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AppliancesMVC.Controllers
+namespace Appliances.Controllers
 {
     public class HomeController : Controller
     {
@@ -34,7 +33,7 @@ namespace AppliancesMVC.Controllers
             }
             else
             {
-                var cos = _context.Cart.FirstOrDefault(x => x.IsPayed == false && x.UserId == user.Id);
+                var cos = _context.Cart.FirstOrDefault(x => x.IsPayed == 0 && x.UserId == user.Id);
                 if (cos != null)
                     ViewBag.NrProduse = _context.CartAppliance.Where(x => x.CartId == cos.Id).Count();
                 else
@@ -94,14 +93,14 @@ namespace AppliancesMVC.Controllers
             }
             else
             {
-                cart = _context.Cart.FirstOrDefault(e => e.IsPayed == false && e.UserId == user.Id);
+                cart = _context.Cart.FirstOrDefault(e => e.IsPayed == 0 && e.UserId == user.Id);
                 cartAppliances = _context.CartAppliance.FirstOrDefault(item => item.ApplianceId == id  && item.Cart.UserId == user.Id);
             }
 
             if (cart == null)
             {
                 cart = new Cart();
-                cart.IsPayed = false;
+                cart.IsPayed = 0;
                 cart.UserId = user.Id;
                 cart.CreatedOn = DateTime.Now;
 
