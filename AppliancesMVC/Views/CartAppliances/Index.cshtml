@@ -64,7 +64,7 @@
             <td> </td>
             <td><h4>@Model.Sum(item => item.TotalPrice).ToString("0.00") Mdl</h4></td>
             <td>
-                <a asp-action="" asp-route-id="" class="text-decoration-none text-success"><h4>Buy now</h4></a>
+                <a asp-action="Pay" asp-route-id="CartAppliance" class="text-decoration-none text-success" ><h4>Pay</h4></a>
             </td>
         </tr>
 

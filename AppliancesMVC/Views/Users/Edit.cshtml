@@ -19,12 +19,39 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BirthDate" class="control-label"></label>
+                <input asp-for="BirthDate" class="form-control" />
+                <span asp-validation-for="BirthDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Role" class="control-label"></label>
+                <input asp-for="Role" class="form-control" />
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefon" class="control-label"></label>
+                <input asp-for="Telefon" class="form-control" />
+                <span asp-validation-for="Telefon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
+                <input type="password" asp-for="Password" class="form-control confirm-psw" onchange="confirmPsw()" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label class="control-label">Repeat Pasword</label>
+                <input type="password" id="Confirm-Password" onchange="confirmPsw()" class="form-control confirm-psw" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <span class="text-danger d-none" id="passError">Passwords doesn't match.</span>
+                <span class="text-success d-none" id="passOk">Passwords matches.</span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary " id="save-btn" disabled />
             </div>
         </form>
     </div>
@@ -33,6 +60,23 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+<script>
+    function confirmPsw() {
+        let passwords = document.getElementsByClassName("confirm-psw");
+
+        document.getElementById('passError').classList.replace('d-block', 'd-none')
+        document.getElementById('passOk').classList.replace('d-block', 'd-none')
+
+        if (passwords[0].value == passwords[1].value) {
+            document.getElementById('passOk').classList.replace('d-none', 'd-block')
+            document.getElementById('save-btn').disabled = false
+        } else {
+            document.getElementById('passError').classList.replace('d-none', 'd-block')
+            document.getElementById('save-btn').disabled = true
+        }
+    }
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

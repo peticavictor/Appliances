@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppliancesMVC.Common.Enum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,8 +11,15 @@ namespace AppliancesMVC.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public String Name{ get; set; }
+        [Required]
         public String Password{ get; set; }
+        public DateTime? BirthDate { get; set; }
+        public String Email { get; set; }
+        public String Telefon { get; set; }
+        public UserRole Role { get; set; }
+
 
         public User(int id, string name, string password)
         {

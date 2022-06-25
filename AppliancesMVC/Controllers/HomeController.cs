@@ -2,11 +2,13 @@
 using AppliancesMVC.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace Appliances.Controllers
@@ -59,6 +61,12 @@ namespace Appliances.Controllers
         }
         public IActionResult Autorizare(User user)
         {
+            var md5 = MD5.Create();
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(user.Password);
+            byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+            user.Password = Convert.ToBase64String(hashBytes);
+
             var existingUser = _context.User.FirstOrDefault(x => x.Name == user.Name && x.Password == user.Password);
 
             if (existingUser != null)
@@ -94,7 +102,6 @@ namespace Appliances.Controllers
             else
             {
                 cart = _context.Cart.FirstOrDefault(e => e.IsPayed == 0 && e.UserId == user.Id);
-                cartAppliances = _context.CartAppliance.FirstOrDefault(item => item.ApplianceId == id  && item.Cart.UserId == user.Id);
             }
 
             if (cart == null)
@@ -108,7 +115,8 @@ namespace Appliances.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            if(cartAppliances == null)
+            cartAppliances = _context.CartAppliance.FirstOrDefault(item => item.ApplianceId == id  && item.Cart.UserId == user.Id && item.CartId == cart.Id);
+            if (cartAppliances == null)
             {
                 cartAppliances = new CartAppliance();
                 cartAppliances.Quantity = 1;
@@ -119,15 +127,24 @@ namespace Appliances.Controllers
             }
             else
             {
-                cartAppliances.Quantity += 1 ;
+                cartAppliances.Quantity += 1;
                 cartAppliances.TotalPrice += (int)appliance.Price;
                 _context.Update(cartAppliances);
             }
 
-            
+            //var cartAppliances = new CartAppliance
+            //{
+            //    Quantity = 1,
+            //    ApplianceId = id,
+            //    CartId = cart.Id,
+            //    //TotalPrice = (int)appliance.Price
+            //};
+
+            //_context.Add(cartAppliances);
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Index");
-        }
+        } 
+        
     }
 }

@@ -54,7 +54,7 @@ namespace Appliances.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Type,Brand,Model,Code,Price,ProducedOn,Image")] Appliance appliance)
+        public async Task<IActionResult> Create([Bind("Id,Type,Brand,Model,Code,Price,Quantity,ProducedOn,Image")] Appliance appliance)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Appliances.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Type,Brand,Model,Code,Price,ProducedOn,Image")] Appliance appliance)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Type,Brand,Model,Code,Price,Quantity,ProducedOn,Image")] Appliance appliance)
         {
             if (id != appliance.Id)
             {

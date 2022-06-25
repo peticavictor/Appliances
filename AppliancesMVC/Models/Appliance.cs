@@ -17,8 +17,9 @@ namespace AppliancesMVC.Models
         public double Price { get; set; }
         public DateTime ProducedOn { get; set; }
         public string Image { get; set; }
+        public int Quantity { get; set; }
 
-        public Appliance(int id, string type, string brand, string model, string code, double price, DateTime producedOn, string image)
+        public Appliance(int id, string type, string brand, string model, string code, double price, int quantity, DateTime producedOn, string image)
         {
             Id=id;
             Type=type;
@@ -28,6 +29,8 @@ namespace AppliancesMVC.Models
             Price=price;
             ProducedOn=producedOn;
             Image=image;
+            Quantity=quantity;
+
         }
         public Appliance()
         {

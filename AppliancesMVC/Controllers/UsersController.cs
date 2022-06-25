@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppliancesMVC.Data;
 using AppliancesMVC.Models;
+using System.Security.Cryptography;
 
 namespace Appliances.Controllers
 {
@@ -54,10 +55,16 @@ namespace Appliances.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Password")] User user)
+        public async Task<IActionResult> Create(User user)
         {
             if (ModelState.IsValid)
             {
+                var md5 = MD5.Create();
+                byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(user.Password);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                user.Password = System.Convert.ToBase64String(hashBytes);
+
                 _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -86,7 +93,7 @@ namespace Appliances.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Password")] User user)
+        public async Task<IActionResult> Edit(int id, User user)
         {
             if (id != user.Id)
             {
@@ -97,6 +104,12 @@ namespace Appliances.Controllers
             {
                 try
                 {
+                    var md5 = MD5.Create();
+                    byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(user.Password);
+                    byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                    user.Password = System.Convert.ToBase64String(hashBytes);
+
                     _context.Update(user);
                     await _context.SaveChangesAsync();
                 }

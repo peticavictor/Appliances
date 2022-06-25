@@ -45,24 +45,29 @@
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="ProducedOn" class="control-label"></label>
                 <input asp-for="ProducedOn" class="form-control" />
                 <span asp-validation-for="ProducedOn" class="text-danger"></span>
             </div>
             <div class="form-group">
-            <label asp-for="Image" class="control-label"></label>
-            <input asp-for="Image" id="upload" type="text" class="form-control" />
-            <img src="@Model.Image" />
-            <span asp-validation-for="Image" class="text-danger"></span>
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" id="upload" type="text" class="form-control" />
+                <img src="@Model.Image" />
+                <span asp-validation-for="Image" class="text-danger"></span>
 
-            <div id="result">
+                <div id="result">
 
+                </div>
+                <div id="upload-preview" style="height:fit-content" class="mt30 mb35"></div>
             </div>
-            <div id="upload-preview" style="height:fit-content" class="mt30 mb35"></div>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-primary" />
-        </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
 
             @*<div class="form-group">
             <label asp-for="Image" class="control-label"></label>
@@ -77,18 +82,18 @@
 
             @*<input type="file" id="inputFile" accept="image/png, image/jpeg">
 
-            <div id="croppieMount">image will be here!</div>
+        <div id="croppieMount">image will be here!</div>
 
-            <div id="actions" style="display:none;">
-                <button id="cropBtn" type="button" class="btn-dark">Crop</button>
-            </div>
+        <div id="actions" style="display:none;">
+            <button id="cropBtn" type="button" class="btn-dark">Crop</button>
+        </div>
 
-            <input asp-for="Image" id="upload" type="text" class="form-control" /> 
-            <img src="@Model.Image" id="image" style="display:none"/>
+        <input asp-for="Image" id="upload" type="text" class="form-control" />
+        <img src="@Model.Image" id="image" style="display:none"/>
 
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>*@
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>*@
         </form>
     </div>
 </div>
